@@ -183,9 +183,24 @@ int main(int argc, char *argv[]) {
         auto matrix2(matrix1);
         size_t node_row_range = matrix1.rows / (comm_size - 1);
         size_t start_r = (rank - 1) * node_row_range;
-        size_t end_r = rank != comm_size - 1 ? rank * node_row_range : matrix1.cols;
-        size_t start_rs = rank == 1 ? start_r + 1 : start_r;
-        size_t end_rs = rank == comm_size - 1 ? end_r - 1 : end_r;
+        size_t end_r;
+        if (rank != comm_size - 1) {
+            end_r = rank * node_row_range;
+        } else {
+            end_r = matrix1.cols;
+        }
+        size_t start_rs;
+        if (rank == 1) {
+            start_rs =  start_r + 1;
+        } else {
+            start_rs = start_r;
+        }
+        size_t end_rs;
+        if (rank == comm_size - 1) {
+            end_rs = end_r - 1;
+        } else {
+            end_rs = end_r;
+        }
         while (iter_num < iter_max) {
             update_grid_cells(matrix1, matrix2, start_rs, end_rs, conf);
             if (iter_num % when_to_save == 0) {
