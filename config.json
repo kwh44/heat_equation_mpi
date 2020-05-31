@@ -1,0 +1,14 @@
+{
+  "dx": 1,
+  "dy": 1,
+  "dt": 0.1,
+  "k": 429,
+  "Cp": 250,
+  "p": 10.5,
+  "n": 50,
+  "m": 50,
+  "max_iter_num": 1000,
+  "save_iter_img": 20,
+  "grid_file_init": "../matrix.txt",
+  "save_location": "../results/"
+}
