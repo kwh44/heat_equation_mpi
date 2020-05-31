@@ -1,1 +1,0 @@
-# heat_equation_mpi
